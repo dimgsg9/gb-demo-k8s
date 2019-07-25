@@ -1,6 +1,6 @@
 stages:
-  - deploy
   - build
+  - deploy
 variables:
   IMAGE_REPO: dimgordi/db-demo-k8s-php-redis
   IMAGE_TAG: latest
