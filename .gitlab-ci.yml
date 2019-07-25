@@ -4,4 +4,5 @@ deploy:
   stage: deploy
   image: linkyard/docker-helm
   script:
-    - helm upgrade --install dmitry-guest-book-php --namespace development --wait --set image.tag=${IMAGE_TAG} --set replicaCount=3 helm-data/
+    - helm init --upgrade
+    - helm upgrade --install dmitry-guest-book-php --namespace development --wait --set replicaCount=3 helm-data/
