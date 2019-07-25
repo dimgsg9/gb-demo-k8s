@@ -2,11 +2,11 @@ stages:
   - deploy
 deploy:
   stage: deploy
+  environment:
+    name: demo
   image:
     name: dtzar/helm-kubectl
   script:
-    - echo $KUBECONFIG
-    - kubectl get nodes
     - helm init --client-only
     - helm upgrade
       --install dmitry-guest-book-php 
