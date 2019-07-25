@@ -2,7 +2,7 @@ stages:
   - deploy
 deploy:
   stage: deploy
-  image: linkyard/docker-helm
+  image: devth/helm
   script:
     - helm init --upgrade
     - helm upgrade
