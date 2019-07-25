@@ -5,4 +5,9 @@ deploy:
   image: linkyard/docker-helm
   script:
     - helm init --upgrade
-    - helm upgrade --install dmitry-guest-book-php --namespace development --wait --set replicaCount=3 helm-data/
+    - helm upgrade
+      --install dmitry-guest-book-php 
+      --namespace development 
+      --wait 
+      --set replicaCount=3
+      ./helm-data/
