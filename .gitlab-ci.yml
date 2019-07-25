@@ -5,6 +5,7 @@ deploy:
   image:
     name: dtzar/helm-kubectl
   script:
+    - echo $KUBECONFIG
     - kubectl get nodes
     - helm init --client-only
     - helm upgrade
