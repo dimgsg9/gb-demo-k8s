@@ -1,5 +1,7 @@
 stages:
   - deploy
+variables:
+  KUBE_NAMESPACE: development
 deploy:
   stage: deploy
   environment:
