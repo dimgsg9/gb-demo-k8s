@@ -3,10 +3,10 @@ stages:
 deploy:
   stage: deploy
   image:
-    name: linkyard/docker-helm
-    entrypoint: [""]
+    name: dtzar/helm-kubectl
   script:
-    - helm init --upgrade
+    - kubectl get nodes
+    - helm init --client-only
     - helm upgrade
       --install dmitry-guest-book-php 
       --namespace development 
