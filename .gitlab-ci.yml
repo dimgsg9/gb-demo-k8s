@@ -1,7 +1,21 @@
 stages:
   - deploy
+  - build
 variables:
+  IMAGE_REPO: dimgordi/db-demo-k8s-php-redis
+  IMAGE_TAG: latest
   KUBE_NAMESPACE: development
+build:
+  stage: build
+  image: docker:latest
+  services:
+  - docker:dind
+  script:
+    - echo "Building application Docker container..."
+    - docker build -t ${IMAGE_REPO}:${IMAGE_TAG} .
+    - docker login -u ${REGISTRY_USERNAME} -p ${REGISTRY_PASSWORD}
+    - echo "Pushing to the Container Registry..."
+    - docker push ${IMAGE_REPO}:${IMAGE_TAG}
 deploy:
   stage: deploy
   environment:

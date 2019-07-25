@@ -1,4 +1,4 @@
 # Default values
 image:
   repository: dimgordi/db-demo-k8s-php-redis
-  tag: v-red
+  tag: latest
