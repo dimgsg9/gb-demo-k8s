@@ -3,7 +3,6 @@ stages:
   - deploy
 variables:
   IMAGE_REPO: dimgordi/db-demo-k8s-php-redis
-  IMAGE_TAG: latest
   KUBE_NAMESPACE: development
 build:
   stage: build
@@ -12,10 +11,10 @@ build:
   - docker:dind
   script:
     - echo "Building application Docker container..."
-    - docker build -t ${IMAGE_REPO}:${IMAGE_TAG} .
+    - docker build -t ${IMAGE_REPO}:${CI_COMMIT_SHORT_SHA} .
     - docker login -u ${REGISTRY_USERNAME} -p ${REGISTRY_PASSWORD}
     - echo "Pushing to the Container Registry..."
-    - docker push ${IMAGE_REPO}:${IMAGE_TAG}
+    - docker push ${IMAGE_REPO}:${CI_COMMIT_SHORT_SHA}
 deploy:
   stage: deploy
   environment:
@@ -30,4 +29,5 @@ deploy:
       --namespace development 
       --wait 
       --set replicaCount=3
+      --set image.tag=${CI_COMMIT_SHORT_SHA}
       ./helm-chart/
